@@ -1,0 +1,413 @@
+User:
+  count:     16 #just so we have more than one page of users when browsing the site  
+  request_sequence:
+    1:
+      url:      /add_user
+      variate: # these are the parameters that will be different for each object
+        Email: email
+        Masterid: text
+      post_params:
+        Country: US
+        Email: testuser@ezkode.com
+        Email_my_messages: '1'
+        Full_Name: 'Test User 1'
+        Hide_my_Email: '1'
+        I_Agree: '1'
+        I_Speak: 'English, Turkish'
+        I_am: ['28', '31']
+        IsPrivate: 0
+        Masterid: testuser
+        Password: password  #passwords must always be 'password' for random authentication to work.
+        Password_bis: password
+        Postal_Code: '94115'
+        Time_Zone: '3'
+        captcha: g4rna6
+        invitation_id: ''
+        origin: registration
+        party_id: ''
+      response:
+        module:    user
+        action:    add
+        forward:   newStep2Avatar
+        contains:  avatar_upload
+
+GroupCreatedByRandomUsers:
+  count:     11
+  authentication: random
+  request_sequence:
+    1:
+      url:      /group/action/new/about
+      variate: # these are the parameters that will be different for each object
+        Name: text
+        Url: text
+        masterid: text
+      post_params:
+        Language: EN
+        Member_Status:  1
+        Member_Status_fld:  1
+        Name: testgroup
+        Notify_On_Apply:  1
+        Privacy_Status: 2
+        Time_Zone:  3
+        Url:  testgroup
+        masterid: testgroup
+        privacy_edit: 1
+        privacy_view: 2
+        special_text_0: 'special text'
+      response:
+        module:    group
+        action:    new
+        forward:   add
+        redirect:  
+          module:  group
+          action:  newDesign
+        contains:  'Step 3: Invite your friends'
+    2:
+      url:      /group/action/new/design
+      variate:
+        masterid: text
+      post_params:
+        layout_choice: 1
+        masterid: testgroup
+      response:
+        module: group
+        action: newDesign
+        redirect:
+          module: group
+          action: newInvite
+        contains: 'Send my invitations and create my group' 
+       
+Group:
+  count:     1
+  authentication:
+    username: testuser1
+    password: password
+  request_sequence:
+    1:
+      url:      /group/action/new/about
+      variate: # these are the parameters that will be different for each object
+        Name: text
+        Url: text
+        masterid: text
+      post_params:
+        Language: EN
+        Member_Status:  1
+        Member_Status_fld:  1
+        Name: testgroup
+        Notify_On_Apply:  1
+        Privacy_Status: 2
+        Time_Zone:  3
+        Url:  group
+        masterid: group
+        privacy_edit: 1
+        privacy_view: 2
+        special_text_0: 'special text'
+      response:
+        module:    group
+        action:    new
+        forward:   add
+        redirect:  
+          module:  group
+          action:  newDesign
+        contains:  'Step 3: Invite your friends'
+    2:
+      url:      /group/action/new/design
+      variate:
+        masterid: text
+      post_params:
+        layout_choice: 1
+        masterid: testgroup
+      response:
+        module: group
+        action: newDesign
+        redirect:
+          module: group
+          action: newInvite
+        contains: 'Send my invitations and create my group' 
+       
+Organization:
+  count:     11
+  authentication: random
+  request_sequence:
+    1:
+      url:      /organization/add
+      variate: # these are the parameters that will be different for each object
+        Name: text
+        masterid: md5
+      post_params:
+        Language: EN
+        Name: testorganization  
+        masterid: '.tmp'
+        special_text_0: 'special text'
+        City: 'San Francisco'
+        Country: 'US'
+        Type: 9
+        We_Speak: English
+        aof_serialized: '28:1:'
+        aofs[]: '28|^|Composting'
+        entity: organization
+        section_title: 'About'
+      response:
+        module:    organization
+        action:    add
+        redirect:  
+          module:  organization
+          action:  index
+        contains:  'You have successfully added this organization.'
+
+Job:
+  count:     26
+  authentication:
+    username: testuser1
+    password: password
+  request_sequence:
+    1:
+      url:      /job/add
+      variate: # these are the parameters that will be different for each object
+        Position: text
+        masterid: md5
+      post_params:
+        City: 'San Francisco'
+        Country: 'US'
+        IsPrivate: 0
+        Language: EN
+        Employer_Name: NCI
+        Position: Developer
+        Time_Commitment: 1
+        Type: 2
+        aof_serialized: '28:1:'
+        aofs[]: '28|^|Composting'
+        masterid: '.tmp'
+        entity: job
+        section_title: 'About'
+        special_text_0: 'special text'
+      response:
+        module:    job
+        action:    add
+        redirect:  
+          module:  job
+          action:  index
+        contains:  'You have successfully added this job.'
+
+Resource:
+  count:     11
+  authentication:
+    username: testuser1
+    password: password
+  request_sequence:
+    1:
+      url:      /resource/add
+      variate: # these are the parameters that will be different for each object
+        Name: text
+        masterid: md5
+      post_params:
+        Date_published[date]: 2009-06-11
+        IsPrivate: 0
+        Language: EN
+        Name: Test Resource
+        Type: 23
+        aof_serialized: '28:1:'
+        aofs[]: '28|^|Composting'
+        masterid: '.tmp'
+        entity: resource
+        section_title: 'About'
+        special_text_0: 'special text'
+      response:
+        module:    resource
+        action:    add
+        redirect:  
+          module:  resource
+          action:  index
+        contains:  'You have successfully added this resource.'
+       
+Article:
+  count:     11
+  authentication:
+    username: testuser1
+    password: password
+  request_sequence:
+    1:
+      url:      /article/add
+      variate: # these are the parameters that will be different for each object
+        Name: text
+        masterid: md5
+      post_params:
+        IsPrivate: 0
+        Language: EN
+        Name: Test Article
+        aof_serialized: '28:1:'
+        aofs[]: '28|^|Composting'
+        masterid: '.tmp'
+        section_title: 'About'
+        special_text_0: 'special text'
+      response:
+        module:    article
+        action:    add
+        redirect:  
+          module:  article
+          action:  index
+        contains:  'You have successfully added this article.'
+
+Event:
+  count:     11
+  authentication:
+    username: testuser1
+    password: password
+  request_sequence:
+    1:
+      url:      /event/add
+      variate: # these are the parameters that will be different for each object
+        Event: text
+        masterid: md5
+        From: datetime
+        To: datetime
+      post_params:
+        City: San Francisco
+        Country: US
+        IsPrivate: 0
+        Language: EN
+        Event: Test Event
+        From: now
+        To: '+1 hour'
+        Type: 5
+        Time_Zone: 3
+        aof_serialized: '28:1:'
+        aofs[]: '28|^|Composting'
+        masterid: '.tmp'
+        section_title: 'About'
+        special_text_0: 'special text'
+      response:
+        module:    event
+        action:    add
+        redirect:  
+          module:  event
+          action:  index
+        contains:  'You have successfully added this event.'        
+
+Forum:
+  count:     3
+  authentication:
+    username: testuser1
+    password: password
+  request_sequence:
+    1:
+      url:      /forum/add
+      variate: # these are the parameters that will be different for each object
+        Subject: text
+        masterid: md5
+      post_params:
+        IsPrivate: 0
+        Language: EN
+        Subject: Test Forum
+        aof_serialized: '28:1:'
+        aofs[]: '28|^|Composting'
+        masterid: '.tmp'
+        section_title: 'About'
+        special_text_0: 'special text'
+      response:
+        module:    forum
+        action:    add
+        redirect:  
+          module:  forum
+          action:  index
+        contains:  'You have successfully added this forum.'
+    
+Solution:
+  count:     11
+  authentication:
+    username: testuser1
+    password: password
+  request_sequence:
+    1:
+      url:      /solution/add
+      requestProcessor: weStateRequestProcessor        
+      variate: # these are the parameters that will be different for each object
+        Name: text
+        masterid: md5
+      post_params:
+        Language: EN
+        Name: testsolution  
+        masterid: '.tmp'
+        Author: ';testuser1:Test User 1 (testuser1):user:Authored by:'
+        Publisher: ';testuser1:Test User 1 (testuser1):user:Published by:'
+        Contact_Person: ';testuser1:Test User 1 (testuser1):user:Contact Person:'
+        Date_Published[date]: '2009-06-11'
+        IsPrivate:  0
+        Content_type: 2
+        entity: solution
+      response:
+        module:    solution
+        action:    add
+        redirect:  
+          module:  solution
+          action:  newStep2
+        contains:  'Create a New Solution (continued)'
+      next_request_params: [masterid]
+    2:
+      url:  /solution/new_step2/
+      post_params:
+        aof_serialized: '28:1:'
+        aofs[]: '28|^|Composting'
+        dummygroups: testgroup1
+        entity: solution
+        group_serialized: testgroup1
+        groups[]: 'testgroup1|^|testgroup1'
+      response:
+        module:    solution
+        action:    newStep2
+        redirect:  
+          module:  solution
+          action:  index
+        contains:  'Solution Info'
+
+ApiKey1:
+  count:     1  
+  authentication:
+    username: testuser1
+    password: password
+  request_sequence:
+    1:
+      url:      /api/create_key
+      post_params:
+        noparam: null #createKey action only looks at the authenticated user and creates the key without any params
+      response:
+        module:    api
+        action:    createKey
+        redirect:  
+          module:  api
+          action:  editApiTypes
+        contains:  'API Key:'
+    2:
+      url:      /api/edit_api_types
+      post_params:
+        api_types: ['10', '20', '30', '40', '60', '100', '110', '120', '130', '140']
+      response:
+        module:    api
+        action:    editApiTypes
+        contains:  'Your settings have been saved.'
+
+ApiKey2:
+  count:     1  
+  authentication:
+    username: testuser2
+    password: password
+  request_sequence:
+    1:
+      url:      /api/create_key
+      post_params:
+        noparam: null #createKey action only looks at the authenticated user and creates the key without any params
+      response:
+        module:    api
+        action:    createKey
+        redirect:  
+          module:  api
+          action:  editApiTypes
+        contains:  'API Key:'
+    2:
+      url:      /api/edit_api_types
+      post_params:
+        api_types: ['10', '20', '30', '40', '60', '100', '110', '120', '130', '140']
+      response:
+        module:    api
+        action:    editApiTypes
+        contains:  'Your settings have been saved.'

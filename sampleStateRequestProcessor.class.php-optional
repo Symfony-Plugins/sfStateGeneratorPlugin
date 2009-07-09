@@ -1,0 +1,15 @@
+<?php
+// PLACE THIS FILE IN YOUR APP LIB
+
+class weStateRequestProcessor extends sfStateGeneratorRequest {
+
+  public function getNextRequestParams() {
+    $nextRequestParams = parent::getNextRequestParams();
+    if ($nextRequestParams)
+    {
+      $nextRequestParams['xyz'] = ...;
+    }
+
+    return $nextRequestParams;
+  }
+}

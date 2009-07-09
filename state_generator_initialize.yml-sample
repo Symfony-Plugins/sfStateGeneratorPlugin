@@ -1,0 +1,20 @@
+tables: 
+ - relations
+ - activity
+ - watchlist
+ - forums
+ - group_members
+ - portal_layouts
+ - groups
+ - parties
+ - solutions
+ - organizations
+ - events
+ - jobs
+ - resources
+ - articles
+ - wikitext
+ - view_log
+ - api_key_to_type
+ - api_key
+ - users
